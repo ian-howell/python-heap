@@ -8,11 +8,14 @@ class Heap(object):
 
     def get(self):
         ret_val = None
-        if self.__size > 0:
+        if self.__size > 1:
             self.__size -= 1
             ret_val = self.heap[0]
             self.heap[0] = self.heap.pop()
             self.heapify(0)
+        else:
+            ret_val = self.heap.pop()
+            self.__size -= 1
         return ret_val
 
     def put(self, x):
@@ -54,3 +57,16 @@ class Heap(object):
             ret_val += str(x) + ' '
         ret_val += ']'
         return ret_val
+
+
+def heap_sort(arr):
+    # Build a minheap from the array
+    min_heap = Heap()
+    for item in arr:
+        min_heap.put(item)
+
+    # Pull the values out of the minheap into the array
+    i = 0
+    while min_heap.size() > 0:
+        arr[i] = min_heap.get()
+        i += 1
