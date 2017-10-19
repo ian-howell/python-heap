@@ -1,5 +1,5 @@
 #!/usr/bin/python
-from random import randrange
+
 
 class Heap(object):
     def __init__(self):
@@ -20,11 +20,11 @@ class Heap(object):
         self.heap.append(x)
 
         i = self.__size - 1
-        parent = (i - 1) / 2
+        parent = (i - 1) // 2
         while (i > 0 and self.heap[i] < self.heap[parent]):
             self.heap[i], self.heap[parent] = self.heap[parent], self.heap[i]
-            i = (i - 1) / 2
-            parent = (i - 1) / 2
+            i = (i - 1) // 2
+            parent = (i - 1) // 2
 
     def size(self):
         return self.__size
@@ -40,7 +40,8 @@ class Heap(object):
             smallest = right
 
         if smallest != i:
-            self.heap[i], self.heap[smallest] = self.heap[smallest], self.heap[i]
+            self.heap[i], self.heap[smallest] = \
+                          self.heap[smallest], self.heap[i]
             self.heapify(smallest)
 
     def __repr__(self):
@@ -53,18 +54,3 @@ class Heap(object):
             ret_val += str(x) + ' '
         ret_val += ']'
         return ret_val
-
-def main():
-    min_heap = Heap()
-
-    for i in range(10):
-        min_heap.put(randrange(1,100))
-    print(min_heap)
-
-    first_item = min_heap.get()
-
-    print('Got {0} from the heap'.format(first_item))
-    print(min_heap)
-
-if __name__ == '__main__':
-    main()
