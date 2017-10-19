@@ -29,6 +29,11 @@ class Heap(object):
             i = (i - 1) // 2
             parent = (i - 1) // 2
 
+    def pop_last(self):
+        last = self.heap[self.__size - 1]
+        self.__size -= 1
+        return last
+
     def size(self):
         return self.__size
 
@@ -66,7 +71,8 @@ def heap_sort(arr):
         min_heap.put(item)
 
     # Pull the values out of the minheap into the array
-    i = 0
-    while min_heap.size() > 0:
-        arr[i] = min_heap.get()
-        i += 1
+    i = len(arr) - 1
+    while i >= 0:
+        last = min_heap.pop_last()
+        arr[i], arr[0] = arr[0], last
+        i -= 1
